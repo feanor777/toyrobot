@@ -1,0 +1,101 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Toyrobot",
+		"_postman_id": "f89b53f7-759d-62e8-920a-3f271e59a934",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/api/robots/place",
+			"request": {
+				"url": "http://localhost:8080/api/robots/place",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"direction\": \"NORTH\",\n\t\"position\" : {\n\t\t\"x\": 3,\n\t\t\"y\": 3\n\t}\n}"
+				},
+				"description": "Place toyrobot on the tabletop"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/robots/move",
+			"request": {
+				"url": "http://localhost:8080/api/robots/move",
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/robots/left",
+			"request": {
+				"url": "http://localhost:8080/api/robots/left",
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/robots/right",
+			"request": {
+				"url": "http://localhost:8080/api/robots/right",
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/robots/report",
+			"request": {
+				"url": "http://localhost:8080/api/robots/report",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/robots/remove",
+			"request": {
+				"url": "http://localhost:8080/api/robots/remove",
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
