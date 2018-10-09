@@ -1,10 +1,8 @@
 package com.idealo.toyrobot.acceptance
 
 import com.idealo.toyrobot.controller.ToyrobotController
-import com.idealo.toyrobot.dto.PlaceRequestDto
 import com.idealo.toyrobot.meta.Endpoints
 import com.idealo.toyrobot.model.Direction
-import com.idealo.toyrobot.model.Position
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.test.web.servlet.MockMvc
@@ -12,7 +10,11 @@ import spock.lang.Specification
 
 import static com.idealo.toyrobot.util.TestUtil.APPLICATION_JSON_UTF8
 import static com.idealo.toyrobot.util.TestUtil.convertObjectToJsonBytes
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
+import static com.idealo.toyrobot.util.TestUtil.createPlaceRequestDto
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
@@ -93,10 +95,5 @@ class AcceptanceTest extends Specification {
         mockMvc.perform(get("${Endpoints.ROBOTS}/report"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath('$.report').value("The robot is missing"))
-    }
-
-
-    PlaceRequestDto createPlaceRequestDto(Direction direction, int x, int y) {
-        return new PlaceRequestDto(direction, new Position(x, y))
     }
 }
