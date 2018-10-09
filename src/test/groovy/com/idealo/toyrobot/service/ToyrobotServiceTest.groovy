@@ -3,12 +3,13 @@ package com.idealo.toyrobot.service
 import com.idealo.toyrobot.ToyrobotApplication
 import com.idealo.toyrobot.dto.PlaceRequestDto
 import com.idealo.toyrobot.model.Direction
-import com.idealo.toyrobot.model.Position
 import com.idealo.toyrobot.model.Rotation
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification
 import spock.lang.Unroll
+
+import static com.idealo.toyrobot.util.TestUtil.createPlaceRequestDto
 
 @SpringBootTest(classes = ToyrobotApplication, webEnvironment = SpringBootTest.WebEnvironment.NONE)
 class ToyrobotServiceTest extends Specification {
@@ -22,7 +23,7 @@ class ToyrobotServiceTest extends Specification {
     @Unroll
     def "place robot to X:0, Y:0, F:#direction, rotate #n times and check position - #report"() {
         given:
-        PlaceRequestDto placeRequestDto = new PlaceRequestDto(direction, new Position(0, 0))
+        PlaceRequestDto placeRequestDto = createPlaceRequestDto(direction, 0, 0)
         toyrobotService.place(placeRequestDto)
 
         when:
@@ -57,7 +58,7 @@ class ToyrobotServiceTest extends Specification {
     @Unroll
     def "place robot to X:#x, Y:#y, F:#direction, move #n times and check position - #report"() {
         given:
-        PlaceRequestDto placeRequestDto = new PlaceRequestDto(direction, new Position(x, y))
+        PlaceRequestDto placeRequestDto = createPlaceRequestDto(direction, x, y)
         toyrobotService.place(placeRequestDto)
 
         when:
@@ -80,7 +81,7 @@ class ToyrobotServiceTest extends Specification {
     @Unroll
     def "place robot x - #x, y - #y, move around the tabletop and check position - #report"() {
         given:
-        PlaceRequestDto placeRequestDto = new PlaceRequestDto(direction, new Position(x, y))
+        PlaceRequestDto placeRequestDto = createPlaceRequestDto(direction, x, y)
         toyrobotService.place(placeRequestDto)
 
         when:
