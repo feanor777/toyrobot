@@ -1,37 +1,88 @@
+import io.qameta.allure.gradle.task.AllureReport
+
 buildscript {
     ext {
         springBootVersion = '2.0.5.RELEASE'
     }
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "io.qameta.allure:allure-gradle:2.8.1"
     }
 }
 
-apply plugin: 'java'
-apply plugin: 'groovy'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-
-group = 'com.idealo'
+group = 'idealo'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
 
-repositories {
-    mavenCentral()
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'io.qameta.allure'
+
+    allure {
+        version = '2.14.0'
+
+        useSpock {
+            version = '2.14.0'
+        }
+    }
+
+    repositories {
+        mavenCentral()
+        maven {
+            url("https://dl.bintray.com/qameta/maven")
+        }
+    }
+
+    dependencies {
+        compile 'com.google.guava:guava:26.0-jre'
+        compile 'org.springframework.boot:spring-boot-starter-web'
+        compile 'com.fasterxml.jackson.core:jackson-databind'
+
+        testCompile 'org.codehaus.groovy:groovy-all'
+        testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4'
+        testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
+        testCompile 'org.springframework.boot:spring-boot-starter-test'
+    }
 }
 
+subprojects {
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.20'
+        annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-dependencies {
-    compile 'com.google.guava:guava:26.0-jre'
-    compile 'org.springframework.boot:spring-boot-starter-web'
+        testCompileOnly 'org.projectlombok:lombok:1.18.20'
+        testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-    compileOnly 'org.projectlombok:lombok'
+        testCompile 'io.qameta.allure:allure-spock:2.14.0'
+    }
 
-    testCompile 'org.codehaus.groovy:groovy-all'
-    testCompile 'org.spockframework:spock-spring:1.1-groovy-2.4'
-    testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
-    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+task allureAggregatedReport(type: AllureReport) {
+    resultsDirs = subprojects.allure.resultsDir
+}
+
+allureAggregatedReport.doFirst {
+    resultsDirs = []
+    subprojects.allure.resultsDir.each {
+        if (it.exists()) {
+            resultsDirs += it
+        }
+    }
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
 }

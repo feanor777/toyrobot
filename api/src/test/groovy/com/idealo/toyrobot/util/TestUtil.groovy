@@ -1,10 +1,9 @@
 package com.idealo.toyrobot.util
 
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.idealo.toyrobot.dto.PlaceRequestDto
 import com.idealo.toyrobot.model.Direction
+import com.idealo.toyrobot.dto.PlaceRequestDto
 import com.idealo.toyrobot.model.Position
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.http.MediaType
 
 import java.nio.charset.Charset
@@ -16,7 +15,6 @@ class TestUtil {
 
     static byte[] convertObjectToJsonBytes(Object object) throws IOException {
         ObjectMapper mapper = new ObjectMapper()
-        mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL)
         return mapper.writeValueAsBytes(object)
     }
 

@@ -1,1 +1,5 @@
 rootProject.name = 'toyrobot'
+
+include 'api'
+include 'biz'
+

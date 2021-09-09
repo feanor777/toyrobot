@@ -4,6 +4,7 @@ import com.idealo.toyrobot.ToyrobotApplication
 import com.idealo.toyrobot.dto.PlaceRequestDto
 import com.idealo.toyrobot.model.Direction
 import com.idealo.toyrobot.model.Rotation
+import com.idealo.toyrobot.service.ToyrobotService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import spock.lang.Specification

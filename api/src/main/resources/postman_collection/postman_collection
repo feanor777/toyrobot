@@ -23,7 +23,7 @@
 					"mode": "raw",
 					"raw": "{\n\t\"direction\": \"NORTH\",\n\t\"position\" : {\n\t\t\"x\": 3,\n\t\t\"y\": 3\n\t}\n}"
 				},
-				"description": "Place toyrobot on the tabletop"
+				"description": "Place idealo.toyrobot on the tabletop"
 			},
 			"response": []
 		},
