@@ -12,4 +12,4 @@ The application is a simulation of a toy robot moving on a square tabletop, of d
 
 For testing please import postman collection from `resources/postman_collection/Toyrobot.postman_collection` or just take a look on tests.
 
-P.S. most probably app is not working now
+test 2
